@@ -26,15 +26,15 @@ class App extends Component {
   };
 
   render() {
-    const filterRobots = this.state.robots.filter((robots) => {
-      return robots.name
+    const {robots, searchfield} = this. state;
+    const filterRobots = robots.filter(robot => {
+      return robot.name
         .toLocaleLowerCase()
-        .includes(this.state.searchfield.toLocaleLowerCase());
+        .includes(searchfield.toLocaleLowerCase());
     });
-    if (this.state.robots.length === 0) {
-      return <h1 className="tc">Loading</h1>;
-    } else {
-      return (
+    return !robots.length? 
+    <h1 className="tc">Loading</h1> :
+    (
         <div className="tc">
           <h1 className="f1">RoboFriends</h1>
           <SearchBox searchChange={this.onSearchChange} />
@@ -43,7 +43,6 @@ class App extends Component {
           </Scroll>
         </div>
       );
-    }
   }
 }
 
